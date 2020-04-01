@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box-arrow{
+				width: 0px;
+				height: 0px;											
+				/*background: lightgreen;*/									/*大三角箭头,三角的对面不用设置border 但是两个邻边要设置border只不过颜色透明即可
+																			小三角箭头,只保留相邻的两个border一个设置透明即可	*/
+				
+				border-top:50px solid red;									
+				border-top:50px solid transparent;
+				border-right:50px solid yellow;
+				border-right:50px solid transparent;
+				border-bottom: 50px solid blueviolet;
+				border-bottom:50px solid transparent;
+				border-left:50px solid darkmagenta;
+			}
+			.box-shadow{
+				width: 100px;
+				height: 100px;
+				/*
+				 box-shadow: h-shadow  v-shadow  blur  spread       color     inset
+				 			 水平阴影      垂直阴影     羽化     扩大阴影       阴影颜色      内阴影
+				 			 
+				 			外阴影就是不设置inset 阴影在div的外面
+				 			从一个div开始 
+				 						设置正数	            从div的右下角开始向外蔓延阴影(为原点) ，右下为正方向
+				 						设置负数             从div的左上角开始向外蔓延阴影   阴影出现在左上方向，
+				 						总结  阴影想出现在div外面的上方时 v-shadow为负数
+				 			  				  阴影想出现在div外面的左方时 h-shadow为负数
+				 			内阴影就是写上inset   阴影在div的里面
+				 			从一个div开始 
+				 						设置正数	            从div的左上角开始向内蔓延阴影(为原点) ，右下为正方向
+				 						设置负数             从div的右下角开始向内蔓延阴影   阴影出现在左上方向，
+				 						总结  阴影想出现在div里面靠下的位置时 v-shadow为负数
+				 			  				  阴影想出现在div里面靠右的位置时 h-shadow为负数
+				 			 
+				 			阴影加上羽化=负的扩大阴影	=======>可以设置单边阴影 比如 水平阴影5px 垂直阴影10px 羽化度2px 扩大阴影-7px  这样水平阴影就会消失
+				 			四面全都有阴影==============>只需要把扩大阴影火力全开即可，稍加羽化会好看一些而已
+				 * */
+				background-color: deepskyblue;
+				box-shadow: 4px 4px 2px #000000; /*这是右下外侧  一般加阴影都不设置扩大阴影,因为这样会把另外两边的阴影也给弄出来就变成了四面全都有阴影了*/
+				box-shadow: -4px 4px 2px #000000;/*这是左下外侧*/
+				box-shadow: 4px -4px 2px #000000;/*这是右上外侧*/
+				box-shadow: inset 4px 4px 2px #000000;/*这是从左上角开始的内蔓延*/
+				box-shadow: inset -4px 4px 2px #000000;/*这是右上角内侧开始的内蔓延*/
+				box-shadow: inset 4px -4px 2px #000000;/*这是左下角内侧开始的内蔓延*/
+				box-shadow: 0 0 1px 8px #000000;/*这是四面全都有阴影*/
+				box-shadow: 4px 2px 1px -3px #000000;/*这是单右外侧有阴影*/
+			}
+			
+			.baba{								/*结合第一个做一个轮播图的小箭头*/
+				position: relative;				/*只是一个子绝父相的框框*/
+				width: 500px;					/*给个定位框大小*/
+				height: 500px;
+			}
+			.redarrow{
+				position: relative;
+				top: 50%;
+				width: 0;
+				height: 0;
+				border-left: 20px solid red;		/*对边没设置，两个邻边设置但不透明，说明是大三角  可以改变其中某个border的宽度这样就是不等边三角形了*/
+				border-bottom: 10px solid transparent;
+				border-top: 10px solid transparent;
+			}
+			.whitecover{
+				position: absolute;					/*重要，让他脱离文档流，盖在上面大三角的，通过定位的方式调整覆盖范围角度，让大三角变成大箭头*/
+				top: 50%;
+				left: -2px;
+				width: 0;
+				height: 0;
+				border-left: 10px solid #FFFFFF;				/*拿一个大概相同形状的大三角来覆盖就可以了*/
+				border-bottom: 10px solid transparent;
+				border-top: 10px solid transparent;
+			}
+		</style>
+	</head>
+	<body>
+<script type="text/javascript">
+	function test() {
+		debugger;
+		var arr = [];
+		for(var i = 0; i < 10; i++) {
+			arr[i] = function() {
+				document.write(i);
+			}
+		}
+		return arr;
+	}
+	var myArr = test();
+	console.log(myArr);
+	for(var j = 0; j < 10; j++) {
+		myArr[j]();
+	}
+</script>
+<div class="box-arrow"></div>
+<div class="box-shadow"></div>
+<div class="baba">
+	<div class="redarrow"></div>
+	<div class="whitecover"></div>
+</div>
+</body>
+</html>

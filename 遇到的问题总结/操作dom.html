@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#a{
+				width: 100px;
+				height: 50px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<script>
+		window.onload = function(){
+		 var oBox=document.getElementById('box'); //获取的是dom元素 ，html映射为dom
+		console.log([oBox])//输出的是dom元素 是dom对象
+		console.log(oBox) //输出的是dom节点 是html标签
+		console.dir(oBox)//输出的是dom节点 是dom对象
+		alert(typeof oBox)
+		
+//		log语句打印的是结果，直接显示信息；
+//		dir语句打印的是内容，对显示对象的所有属性和方法。这样的区别在输出普通数据时没有区别，打印的内容完全一样，在打印对象时就有区别了。
+        oBox.test='测试';
+        oBox.setAttribute("wq","王琦1")
+        console.log(oBox.style)
+        console.log(oBox.getAttribute("style"))
+     //第一组
+      alert(oBox.xdd); // undefined  本是html元素，通过doc.get**() html的atr特性 映射为  DOM的pro属性时，只映射标准id style属性不映射xdd特性
+//(通过setAttr设置的就是设置在html特性上,如果不标准一样不会映射在dom上)，访问非标准属性将得到 undefined。
+      
+      alert(oBox.getAttribute('xdd')) // 王琦
+      //第二组
+      alert(oBox.test); // 测试
+     alert(oBox.getAttribute('test')) // null
+		var ab = document.getElementById("ab")
+		function addAtr(){
+			odiv.style["height"] = 400+"px"
+		}
+		
+		var a = {
+			k:"",
+			name:"小明"
+		}
+		a.k = 1
+		console.log(a)
+		console.log(a.k)
+			}
+		
+		</script>
+		<input type="button" name="" id="ab" value="" onclick="addAtr()"/>
+		<div id="box" xdd="王琦" style="width:100%; padding:10px;"></div>
+	</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆-饿了么</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #fff;
+        }
+        .box{
+            width: 300px;
+            margin: 50px auto;
+            /* background: #999; */
+        }
+        .box-logo{
+            width: 300px;
+            text-align: center;
+        }
+        .box-logo img{
+            width: 150px;
+            margin:auto;
+            padding-bottom: 20px;
+        }
+        .box-one{
+            width: 298px;
+            height: 50px;
+            /* background: #000; */
+            margin-bottom: 20px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            position: relative;
+        }
+        .box-one input{
+            width: 280px;
+            height: 48px;
+            border: none;
+            position: absolute;
+            left: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+        .active span{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: #999;
+            cursor: pointer;
+        }
+        .active span:hover{
+            color: #2395ff;
+        }
+        .box-text{
+            width: 300px;
+            text-align: left;
+            padding-bottom: 20px;
+        }
+        .box-text span{
+            font-size: 14px;
+            color: #999;
+        }
+        .box-text a{
+            text-decoration: none;
+            color: #2395ff;
+            cursor: pointer;
+        }
+        .box-btn{
+            width: 300px;
+            padding-bottom: 20px;
+        }
+        .box-btn button{
+            width: 300px;
+            height: 45px;
+            border-radius: 5px;
+            border: none;
+            background: #4cd964;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .box-we{
+            width: 300px;
+            text-align: center;
+        }
+        .box-we span{
+            font-size: 14px;
+            color: #999;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="box-logo">
+            <img src="./logo.png" alt="">
+        </div>
+        <div class="box-one active">
+            <input type="text" placeholder="手机号">
+            <span>获取验证码</span>
+        </div>
+        <div class="box-one">
+            <input type="text" placeholder="验证码">
+        </div>
+        <div class="box-text">
+            <span>新用户登陆即自动注册，并表示已同意<a href="">《用户服务协议》</a></span>
+        </div>
+        <div class="box-btn">
+            <button>登陆</button>
+        </div>
+        <div class="box-we">
+            <span>关于我们</span>
+        </div>
+    </div>
+</body>
+</html>

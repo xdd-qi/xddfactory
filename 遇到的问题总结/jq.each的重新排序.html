@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript"> //用于音乐列表12345678项，删掉4号歌，重新给序列做号
+			$(".className").each(function(index, ele){ //调用each的时候 形参index是重新给.className从0开始排序的     
+				ele.index = index; //重新给ele的属性index赋值新的index   01234567      0124567    重新赋值为      0123456
+				$(ele).find(".className").text(index + 1)//把列表单子上从12345678 删掉4 1235678 重新把这个数字 1234567
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		
+	
+<ol>
+    <li>第一项</li>
+    <li>第二项</li>
+    <li>第三项</li>
+    <li>第四项</li>
+</ol>
+<script type="text/javascript">
+	window.onload = function() {  //  函数1
+    var lis = document.getElementsByTagName('li');
+    for (var i = 0; i < lis.length; i++) {
+    	console.log(i)
+        lis[i].onclick = function() {  //  函数2
+            console.log(i);
+        }
+    }
+}
+</script>
+
+	</body>
+
+</html>

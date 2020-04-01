@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript" src="js/jquery-3.4.1.js" ></script>
+		<script>
+			//修改选中的选项卡样式
+			$(this).addClass("要添加的样式")
+			//还原其他未选中的样式==>删除被选中时的样式  .siblings()排除this后的其他同级元素
+			$(this).siblings().removeClass("已添加的样式")
+			//获取当前选项卡的索引
+			var index = $(this).index()
+			//根据索引找到对应的图片
+			var ali = $("选择器名字").eq(index)
+			//展示
+			ali.addClass("要添加的样式")
+		</script>
+	</body>
+</html>

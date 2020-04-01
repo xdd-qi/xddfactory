@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>折叠菜单</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.nav{
+				list-style: none;
+				width: 300px;
+				margin: 100px auto;
+				/*border: 1px solid #000;   请尝试写bd+ 后按tab*/    
+				
+				
+				
+			}
+			.nav>li{
+				border: 1px solid #000000;
+				line-height: 35px;
+				border-bottom: none;		/*请尝试写bb+ 后按tab*/
+				/*padding-left: 20px;*/
+				text-indent: 2em;			/*首行缩进*/
+			}
+			.nav>li:last-child{
+				border: 1px solid #000;
+				border-bottom-right-radius: 10px;/*请尝试写bbrr*/
+				border-bottom-left-radius: 10px;/*请尝试写bblr*/
+			}
+			.nav>li:first-child{
+				border-top-right-radius: 10px;/*请尝试写btrr*/
+				border-top-left-radius: 10px;/*请尝试写btlr*/
+			}
+			.sub>li{
+				list-style: none;
+				background: mediumpurple;
+				border-bottom: 1px solid #FFFFFF;
+			}
+			.sub>li:hover{
+				background: red;
+			}
+			.sub{
+				display: none;
+			}	
+			
+		</style>
+		<script type="text/javascript" src="js/jquery-3.4.1.js" ></script>
+		<script type="text/javascript">
+			$(function(){
+				//1.监听一级菜单的点击事件
+				$(".nav>li").click(function(){
+					//1.1拿到二级菜单================>.children()查找指定元素的儿子的方法
+					console.log($(this).children(".sub"))
+					//方案添加一个类名，叫打开，给其他的类名清空判断，如果是打开则收起所有子菜单
+					$(this).addClass("open")
+					var $sub = $(this).children(".sub")
+					//1.2让二级菜单展开==============>slideDown()向下展开
+					$sub.slideDown(1000)
+					//1.3拿到所有非当前的一级菜单
+					$(this).siblings()
+					//1.3拿到所有非当前的二级菜单
+					var otherSub = $(this).siblings().children(".sub")
+					//1.4让二级菜单向上收回
+					otherSub.slideUp(1000)
+				})
+				
+			})
+				
+			
+		</script>
+	</head>
+	<body>
+		<ul class="nav">
+			<li>一级<span></span>
+				<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+			<li>一级
+			<ul class="sub">
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+					<li>二级菜单</li>
+				</ul>
+			</li>
+		</ul>
+	
+	</body>
+</html>
+<!--	！按tab
+		div.item 按tab
+		ul>li.item*3 按tab 
+		ul.nav>li{soeasytoohappy}*2 按tab-->
+

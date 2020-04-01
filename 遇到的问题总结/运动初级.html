@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>匀速运动</title>
+    <style>
+        .sport {
+            width: 60px;
+            height: 60px;
+            background-color: orange;
+            border-radius: 5px;
+            position: absolute;
+            top: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+
+        #div1 {
+            top: 60px;
+            left: 0;
+        }
+
+        #div2 {
+            top: 150px;
+            left: 900px;
+        }
+
+        #reference {
+            width: 1px;
+            height: 260px;
+            background-color: red;
+            position: fixed;
+            top: 20px;
+            left: 450px;
+        }
+    </style>
+    <script>
+        function startMove(obj, iTarget) {//obj是运动的对象名称，iTarget是运动到的位置
+            let timer = null; //定时器id
+            let oDiv1 = document.getElementById(obj);
+
+            clearInterval(timer); //重点注意开启新的定时器前，需要把旧的定时器闭关，否则会产生多个定时器！
+            timer = setInterval(function () {
+                let iSpeed = 0;
+                let l = oDiv1.offsetLeft - iTarget; // l = 运动物体与目标物体之间的距离
+                iSpeed = l > 0 ? -8 : 8; //判断运动方向，如果大于0 -8 小于0 8
+                if (Math.abs(l) < iSpeed) { //Math.abs() 绝对值；匀速运动时,当距离l < 速度iSpeed则可以表示运动物体已到达目的地（判断条件）
+                    clearInterval(timer); //闭关定时器  
+                    oDiv1.style.left = iTarget + 'px'; // 闭关定时器时可能运动物体只是接近目的地而非完美到达，所以需要手动设置完美抵达目的地！
+                } else {
+                    oDiv1.style.left = oDiv1.offsetLeft + iSpeed + 'px'; //运动过程
+                }
+            }, 30);
+
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="开始运动" onclick="startMove('div1',450)" />
+    <input type="button" value="开始运动" onclick="startMove('div2',450)" />
+    <div id="div1" class="sport">A</div>
+    <div id="div2" class="sport">B</div>
+    <div id="reference"></div>
+</body>
+
+</html>

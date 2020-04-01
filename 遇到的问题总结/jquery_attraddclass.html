@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("button").click(function() {
+				debugger;
+				//$('#name').addClass('intro')
+				//$("#name").attr({'required':'required',color:'pink'});
+				$("#name").attr('class', 'main');
+				var a = $('#name').css('color');
+				console.log(a);
+				$("#name").attr('class', 'intro');
+				var b = $('#name').css('color');
+				console.log(b);
+				$('#name').removeClass()/*参数可选，移除所有的类*/
+			});
+		});
+	</script>
+	<style type="text/css">
+		.intro {
+			font-size: 10px;
+			color: red;
+			require: true
+		}
+		
+		.main {
+			font-size: 20px;
+			color: blue;
+		}
+	</style>
+	</head>
+
+	<body>
+		<form action="index.html" method="get">
+			<input type="text" id="name" class="required" />
+			<button>向第一个 input元素添加一个属性</button>
+			<input type="submit" />
+		</form>
+	</body>
+
+</html>

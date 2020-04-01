@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			/*在js中,之前我们获取属性大多用的都是ele.style.border这种形式的方法,
+			 * 但是这种方法是有局限性的,该方法只能获取到行内样式,获取不了外部的样式.
+			 * 所以呢下面我就教大家获取外部样式的方法,因为获取外部的样式存在兼容性的问题,所以后面我还会教大家解决兼容性的方法.
+
+			style:各大浏览器都兼容,能设置样式和获取样式,但是获取不了外部样式,如果写了行内没有的样式,返回的是空值
+
+			写法:ele.style.attr(这样为获取),ele.style.attr="值";*/
+			
+			/*
+currentStyle属性和getComputedStyle属性不能设置属性,只能获取
+
+currentStyle:该属性只兼容IE,不兼容火狐和谷歌
+
+ 写法:ele.currentStyle["attr"]或者ele.currentStyle.attr;
+
+getComputedStyle:该属性是兼容火狐谷歌,不兼容IE
+
+写法:window.getComputedStyle(ele,null)[attr]获取是window.getComputedStyle(ele,null).attr*/
+
+
+			function getStyle(obj,name){
+				if(obj.currentStyle){
+					return obj.currentStyle[name]
+				}else{
+					return getComputedStyle(obj,false)[name]
+				}
+			}
+			
+			var cur = parseInt(getStyle(oDiv,'width'))
+		</script>
+	</body>
+</html>

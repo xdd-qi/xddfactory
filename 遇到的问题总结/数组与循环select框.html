@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="js/jquery-3.4.1.js"></script>
+	<body>
+		<script>
+			var Mlist = [];
+				for(i=1;i<13;i++){
+					Mlist.push(i)
+				}
+			
+			console.log(Mlist)
+			function month(){
+				
+				var options=$("#year option:selected");  //jquery获取选中的项   x:selected
+
+				alert(options.val());   //拿到选中项的值 option里的value='xxx'
+
+				alert(options.text());   //拿到选中项的文本<option>xxxx</option>
+				
+				
+				
+				
+			}
+			function month2(v){
+				console.log(v);
+				var m = v;
+				$('#month').val(m)
+			}
+			$(function(){
+				$("#year").empty();
+				for (i=0;i<Mlist.length;i++) {
+					
+				$("#year").append('<option>'+Mlist[i]+'</option>')
+				}
+				
+			})
+		</script>
+		<select id="year"  onchange="month2(this.options[this.options.selectedIndex].value)"><!--Select 对象属性 x.options[x.selectedIndex].text
+																															也可以直接(this.value)获得select里的value值
+		-->
+																							<!--month()用jquery方法 month2(---)用js-->
+			<option value="">请选择</option>
+			<option></option>
+		</select>
+		<input type="text" id="month" value=""/>
+	</body>
+</html>

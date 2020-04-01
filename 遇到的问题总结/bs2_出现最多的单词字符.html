@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			   // 随意定义一个字符串
+        var str = "i am a fronend developer. i develop JavaScript code on the web.";
+        var str1 = str.replace(/[\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g,"")
+        console.log(str1)
+        var str2 = str1.split(" ")
+        console.log(str2)
+		getWordnum(str2)
+      // 定义函数
+      function getWordnum(str2) {
+          // 定义一个空对象，因为这边要求出现最多次数，以及出现的字符，这边使用对象的方式再合适不过了，键值对的形式
+          var obj = {};
+          // 求出字符串的长度
+          var len = str2.length;
+          console.log(len)
+          // for循环如果遍历整个字符串
+          for( var i = 0; i < len; i++) {
+          	
+              // 每次将一个字符赋值给alpha   i   am   fron..
+             var alpha = str2[i];
+              // 如果定义的obj里有这个字符的话,那么这个字符的值加1
+              console.log(alpha)
+            
+            if ( obj[alpha] ) {
+	                 obj[alpha]++;
+            }
+            
+//               否则的话这个字符的值等于1,刚开始肯定都是走这边,因为对象使我们定义的空对象,现在才开始增加属性
+             else {
+                  obj[alpha] = 1;
+            }
+          }
+          console.log(obj)
+//          for(key in obj){
+//          	debugger
+          	//可以观察到此时的alpha在循环的最后一次已经固定赋值web，而key有11项，故输出11次obj[web]
+//          	console.log(obj[alpha])
+          
+          // 随意定义一个出现最多的次数，用于接收obj[key] 值 =>次数
+          var maxNum = -1;
+          // 遍历obj对象
+          for( key in obj) {
+              // 求出obj里出现最多字符的次数并且赋值给maxNum
+              if ( obj[key] > maxNum) {
+                  maxNum = obj[key];
+              }
+          }
+          // 定义一个空数组来输出出现最多的内容 那个obj的key => 内容
+          var maxWord = [];
+          // 再次遍历obj对象
+          for( key in obj) {
+              // 如果当前的obj里的字符出现次数等于maxNum的话,就像我们定义的空数组里添加这个字符
+              if ( obj[key] == maxNum) {
+                  maxWord.push(key);
+              }
+          }
+          // 将结果打印出来
+          console.log('出现最多次数的word是:' + maxWord + ' 出现次数为:' + maxNum);
+      }
+
+
+		</script>
+		    
+	</body>
+</html>

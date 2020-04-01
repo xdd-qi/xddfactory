@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = [{q:1}]
+
+console.log(a) //[{"q":2,"w":2}]
+//var b = a.map(x=>{return x.q==1?"有q了":"没q了"}) //{q:1}=.q改变值=>{q:2}
+	
+
+var b = a.map(x=>{x.q=2;return x})
+b[0].q=222
+
+
+
+//	b.w=1
+
+console.log(b) //[{"q":2,"w":2},w:1]
+
+console.log(a) //[{"q":2,"w":2}]
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Dog(){
+				return new Dog.prototype.init()
+			}	
+			Dog.prototype = {
+				constructor:Dog,
+				init:function(){
+					this.name = "旺财";
+					this.food = "火腿肠";
+					this.age = 1;
+				},
+				say:function(){
+					console.log(this.name,this.food)
+				}
+			}
+			Dog.prototype.init.prototype = Dog.prototype;
+			var d = new Dog();
+			Dog.prototype.init.prototype = Dog.prototype;
+//			d.init()		
+			d.say()
+			console.log(d)
+			console.log(Dog.prototype)
+			
+		</script>
+	</body>
+</html>

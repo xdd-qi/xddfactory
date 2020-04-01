@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#run{
+				margin: 0 auto;
+				width: 800px;
+				height: 160px;
+				overflow: hidden;
+				position: relative;
+				border: 1px solid red;
+			}
+			ul{
+				padding: 0;
+				position: absolute;
+				left: 0;
+				top: 0;
+				list-style: none;
+				/*width: 2200px; /*1400是一个完整的ul加上重复的四个li*/
+			}
+			li{
+				width: 200px;
+				height: 160px;
+				float: left;
+			}
+		</style>
+	</head>
+	
+	<body>
+	<script>
+		window.onload = function(){
+			var oDiv  = document.getElementById("run")
+			var oUl = document.getElementsByTagName("ul")[0]
+			var oLi = document.getElementsByTagName("li")
+			console.log(oUl)
+			console.log(oDiv)
+			console.log(oLi)
+			console.log(oUl.style.marginLeft)
+			console.log(oUl.offsetLeft)
+			oUl.innerHTML = oUl.innerHTML+oUl.innerHTML
+			oUl.style.width = oLi[0].offsetWidth*oLi.length+"px"
+			console.log(oUl.innerHTML)
+			console.log(oUl.offsetWidth)
+			
+			var timer;
+			run();
+			function run(){
+				timer = setInterval(function(){
+					if (oUl.offsetLeft<-oUl.offsetWidth/2) {
+						
+						console.log(oUl.offsetLeft);
+						oUl.style.left= '0';
+					}
+					oUl.style.left = oUl.offsetLeft-20+"px";
+				},50);
+			}
+			oDiv.onmouseout = function(){
+				run()
+			}
+			oDiv.onmouseover = function(){
+				clearInterval(timer)
+			}
+			
+		}
+	</script>
+		<div id="run">
+			<ul>
+				<li style="background-color: red;"></li>
+				<li style="background-color: orange;"></li>
+				<li style="background-color: yellow;"></li>
+				<li style="background-color: lightseagreen;"></li>
+				<li style="background-color: aqua;"></li>
+				<li style="background-color: deepskyblue;"></li>
+				<li style="background-color: deeppink;"></li>
+				<!--因为设置的div一次能展示四个li，所以补充四个li来达到以假乱真，当再展示到这四个时候把ul的left拉扯回去即归0
+				<li style="background-color: red;"></li>
+				<li style="background-color: orange;"></li>
+				<li style="background-color: yellow;"></li>
+				<li style="background-color: lightseagreen;"></li>
+-->
+	
+			</ul>
+		</div>
+	</body>
+	
+</html>

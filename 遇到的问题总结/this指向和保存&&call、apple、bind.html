@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.div1{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="div1"></div>
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script>
+			
+	var a = 1
+function test () {
+    console.log(this.a)
+}
+var obj = {
+    a: 2,
+    test
+}
+setTimeout(obj.test)
+var a = 1
+function test (a) {
+    this.a = a
+}
+var b = new test(2)
+console.log(b.a)			
+			
+			var name = "wq",
+				age = "17"
+			var obj = {
+
+				name: "xdd",
+				objage: this.age,
+				myfun: function() {
+					console.log(this)
+					console.log(this.name + "年龄" + this.age + this.objage)
+					return this.name + "年龄" + this.age + this.objage
+				}
+			}
+			console.log(this) //指向window
+			console.log(obj.myfun()) //myfun函数的调用  来自obj的调用  this指向obj对象，this.name就是obj.name  this,age就是obj.age显然obj没有age属性
+			console.log(obj.objage) //这个是访问obj的一个属性叫objage，这个this永远都是指向window的 原因就相当于 有一个a：function(){alert(this)} ; 执行a(),实际上是window.a()
+			var j = obj.myfun
+			j() //前后15行代码的this指向不同 因为this的指向是最终谁调用了他，这里是window.j的调用 此处的this换成window  全局上有name age属性 所以有//上面是window.obj.的调用
+
+			var show = {
+				btn: $('.div1'),
+				init: function() {
+					var that = this;   
+					console.log(this);
+					this.btn.click(function() {
+						that.change();
+						console.log(this);
+						console.log(that);
+					})
+
+				},
+				change: function() {
+					this.btn.css({
+						'background': 'green'
+					});
+
+				}
+			}
+			show.init(); //init函数的调用  来自show的调用  this指向show对象 {btn:$ init:fn change:fn},现在的this是show里的环境，
+						//如果不用that保存this，在btn的click中若是this.change()
+						//则会找不到这个change方法，因为这个click点击后的回调函数是由btn调用的，btn只是个$(div1)，div1的html标签，没有show环境里的的函数方法
+						
+						
+			
+//			=========================================================================================================================================
+//			=========================================================================================================================================
+			
+			var name = "wq",
+				age = "17"
+			var obj1 = {
+
+				name: "xdd",
+				objage: this.age,
+				myfun1: function() {
+					console.log(this)
+					console.log(this.name + "年龄" + this.age + this.objage)
+					return this.name + "年龄" + this.age + this.objage
+				}
+			}
+			var bd = {
+				name:"德玛西亚",
+				age:"99"
+			}
+			obj1.myfun1.call(bd)
+			obj1.myfun1.apply(bd)
+			obj1.myfun1.bind(bd)()
+			
+			
+//			call()、apply()、bind() 都是用来重定义 this 这个对象的！
+//call 和 apply 是 Function 的原型方法，它们能够将特定函数当做一个方法绑定到指定对象上，并进行调用。具体用法如下：
+//function.call(thisobj, args...)
+//function.apply(thisobj, [args])
+
+//function 表示要调用的函数；参数 thisobj 表示绑定对象，即 this 指代的对象；
+//参数 args 表示要传递给被调用函数的参数。
+//call 方法可以接收多个参数列表，
+//而 apply 只能接收一个数组或者伪类数组，数组元素将作为参数列表传递给被调用的函数。
+
+//			以上除了 bind 方法后面多了个 () 外 ，结果返回都一致！
+//
+//由此得出结论，bind 返回的是一个新的函数，你必须调用它才会被执行。
+
+		</script>
+	</body>
+
+</html>

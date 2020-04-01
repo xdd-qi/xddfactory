@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#a{
+				width: 100px;
+				height: 50px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+		window.onload = function(){
+		var odiv = document.getElementById("a")
+//		odiv.setAttribute("curasdasdasd","haokan")
+//		odiv.curasdasdasd="haokan"
+//		console.log(odiv)
+//		var a = odiv.getAttribute("curasdasdasd")
+//		console.log(a)
+//		console.log(odiv.curasdasdasd)
+
+		
+		
+		
+		
+		odiv.onclick =function () {
+			
+			odiv.style["height"] = 400+"px"
+		}
+		
+		
+		var a = {
+			k:"",
+			name:"小明"
+		}
+		a.k = 1
+		console.log(a)
+		console.log(a.k)
+			}
+//		function add(){
+//			var odiv = document.getElementById("a")
+//			odiv.style["height"] = 400+"px"
+//		}
+
+
+
+		</script>
+		
+		
+		
+		<div id="a">写了一个最简单的页面。在script标签中使用的 
+			window.onload = function() { 
+				function add() { //... } 
+				}
+
+页面上：
+"<div onclick="add()"></div>"
+
+但是，函数不仅没有触发，同时控制台报错：add() is not defined.
+
+ 
+
+分析：这里需要两个背景知识：1）HTML页面执行顺序为自上而下；2）window.onload=function() {}会等页面全部加载完毕后再执行。
+
+基于上面两点，当程序执行到window.onload的时候，不会去解析里面的内容。但是，当解析到div如果标签上的有写onclick函数的时候，就会去找add()函数，这个时候发现程序里面是没有的，所以就会报错。
+
+ 
+！！！！！！！！！！！！！！！！！解决：这个时候，
+如果不写window.onload内部写在外面，就是window来调用 可以找得到
+加上window.onload后改变了onclick（）函数的作用域，使其成为内部函数，故而οnclick=”“无法访问到这个函数，而放到外面onclick()是绑定在window上的，所以οnclick=”“能够访问到。 
+
+
+可以使用obj.onclick = add; 
+		function add(){
+			...
+		}
+就可以了。
+
+
+或者不绑定在标签上onclick事件    直接获取obj然后 给obj添加属性方法obj.onclick = function(){
+					
+				}
+ 					这样做就绕开了解析时有函数就找函数的问题：（ 解析到div标签内部的方法 而未找到该方法的问题了），因为我绑定的是div内部属性.onclick
+
+注意：1）obj: 这个是些onclick事件的那个标签的DOM对象；2）add后面不需要加（）。如果加了就成了直接调用，所以，直接写名字就可以了。这是两个需要注意的细节。</div>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				height: 200px;
+				width: 200px;
+				border: 1px solid black;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oDiv = document.getElementById("div")
+				setInterval( function(){
+					oDiv.style.width = oDiv.offsetWidth -3 +"px" //试试 -1 -2 -3
+				},50)
+			}
+		</script>
+	</head>
+	<body>
+		<div id="div"></div>
+	</body>
+</html>

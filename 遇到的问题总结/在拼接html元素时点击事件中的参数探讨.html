@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>点击事件中的参数探讨</title>
+	</head>
+	<body>
+		<script>
+			
+		window.onload = function(){
+			var obj={
+				id:965,
+				name1:'zhangnengliang',
+				name2:'ydl',
+				name3:'niunuli965'}
+			
+				var numid = obj.id;		//！！！！！！！！！！！！讨论！！！！！！！！！！！！
+										//numid是数字965,是number类型，可以传参成功  ++取得是965 ,而不是‘965’
+				var name_z = obj.name1 	//name_z是英文字符是string类型  
+									   	//var a='sdw123';因为++取的值是sdw123,但是我们传参的时候不能这么传aaa(sdw123),
+									   	//应该是aaa('sdw123')
+									   	//故应该变成字符串'xxxx'
+										
+				var name_n = obj.name3 //name_n是英文数字混合字符，是string类型 
+										
+										//！！！！！！！！！！！！总结！！！！！！！！！！！！！
+										//意味着我们要在++两边加上'',而这就是那个看似转义符的由来，那个转义符的作用实际上是将参数变为字符串。
+										//至此，引号加不加分情况，     \’===>’  
+										//1.参数为1，’1’，这种数字型参数时，加不加都行； 
+										//2.参数为‘a’,‘a123’这种字符串型，必须加； 
+										//3.加的话可以确保万无一失。
+										
+										
+				console.log(obj);
+				console.log(numid);
+				console.log(name_z);
+				console.log(name_n);
+			var abuild = document.getElementById("build");
+			
+			abuild.innerHTML = '<input type="button" value="获取参数" onclick="showArg(\''+name_n+'\')">'
+		    	/*直接写在body里面的是时候是怎么写的 <a href="javascript:editRecord()" >编辑</a>*/
+		    /*第一步：变成字符串
+								'<a href="javascript:editRecord()" >编辑</a>'
+			第二步：加上变量,如果直接在'ab ff="xxxx:(变量)"ggg'写的任何东西都会一起解析成字符串
+								'<a href="javascript:editRecord('+_id+')" >编辑</a>'
+								'        "    字符串                         '+变量+' "         '
+								这个时候我们把这个字符串拆开了，变成：字符串+变量+字符串
+															    用+作连接符，++之间放变量													
+			如果在引号里面使用相同的引号，需要用 \ 转义      \'===>'  
+			编译顺序从左边第一个'开始  到下一个'为止
+			
+			
+			
+			
+			原文链接：https://blog.csdn.net/aizongjie/article/details/56667504*/
+		}
+			function showArg(i){
+				
+				console.log(i);
+				console.log(typeof i);
+			}
+		
+		
+			
+			
+			
+			
+		</script>
+		<div id="build"></div>
+	</body>
+</html>

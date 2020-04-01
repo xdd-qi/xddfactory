@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				
+			}
+			div{
+				width: 600px;
+				height: 161px;
+				border: 1px solid #000;
+				margin: 100px auto;
+				overflow: hidden;/*只显示div里的*/
+			}
+			ul{
+				list-style: none;
+				width: 1800px;
+				height: 161px;
+				background: #000000;
+			}
+			ul>li{
+				float: left;
+				height: 161px;
+			}
+			.red{
+				width: 300px;
+				background: red;
+			}
+			.yellow{
+				width: 300px;
+				background: yellow;
+			}
+			.blue{
+				width: 300px;
+				background: blue;
+			}
+			.green{
+				width: 300px;
+				background: green;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-3.4.1.js" ></script>
+		<script>
+			$(function(){
+				
+				//0.定义一个变量保存我们的偏移位
+				var offset = 0
+				//1.让图片滚动起来,用定时器来一直执行
+				//1.定义一个变量，然后给这个变量赋值一个定时器函数，把定时器存起来方便以后调用它关闭它
+				var timer;
+				function autoPlay(){
+					timer = setInterval(function(){
+					//1.1不断修改我们的偏移位，确保margin-left一直向左不断减小
+					offset+= -4
+					if(offset<= -1200){//如果偏移量能让整个ul里非重复的li图片完成滚动出屏幕时，则重置偏移量，让图片复位滚动，这是第1、2会和第5、6重叠，如他们相同则看不出什么跳动的痕迹
+						offset = 0
+					}
+					//1.2找到ul让他的margin-left一直向左不断减小
+					$("ul").css("marginLeft",offset)
+				},50)
+					}
+				//为了页面加载完成就可以开始滚动，就调用这个方法
+				autoPlay();
+				
+					//2.监听li的移入和移出事件
+					$("li").hover(function(){
+						//停止滚动就是关闭定时器
+						clearInterval(timer);
+						//给非当前选中添加一个灰色遮罩蒙版=====>就是显示ul的背景色，让li变为半透明  .stop()用来取消之前的动画球，立即执行我的添加蒙版动画
+						$(this).siblings().stop().fadeTo(100,0.5);
+						//当鼠标又移入了其他的li时，去除当前选中的蒙版=====>就是不显示ul的背景色，让li完全不透明
+						$(this).stop().fadeTo(100,1);
+					}, function(){
+						//继续滚动就是重新开启定时器，就是定时器里的函数要单独定义一下，不要直接写在定时器里，所以继续滚动就是再调用这个方法
+						autoPlay();
+						//当鼠标移出的时候让每个li都不要有任何的蒙版
+						$("li").stop().fadeTo(100,1);
+					})
+			})
+		</script>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li class="red"><img src="" alt="" />1</li>
+				<li class="yellow"><img src="" alt="" />2</li>
+				<li class="blue"><img src="" alt="" />3</li>
+				<li class="green"><img src="" alt="" />4</li>
+				<li class="red"><img src="" alt="" />1</li><!--这两个li是重复第一二两个li，目的是为了不让图片复位时出现闪现跳动的bug，这样第5、6li等于第1、2li，在完成滚动复位时第1、2li会和5、6li覆盖在一起不会有bug-->
+				<li class="yellow"><img src="" alt="" />2</li>
+			</ul>
+		</div>
+	</body>
+</html>
