@@ -14,12 +14,12 @@
         }
         
         .menu li {
-            float: left;
+            /* float: left; */
             background: url(img/under.gif);
         }
         
         .menu ul li a {
-            display: block;
+            display: inline-block;
             padding-left: 30px;
             font-size: 15px;
             font-weight: 800;
@@ -35,13 +35,13 @@
             /*用a标签覆盖左侧*/
         }
         /*
-		span是肯定要设计为块级元素，因为如果是行内元素的话，只是在行里即文字高度设置背景图片。
+		span是肯定要设计为行内块级元素，因为如果是行内元素的话，只是在行里即文字自身宽度高度设置背景图片。如果是块级则独占一行，背景图也会完整显示
 		让a和span是同高的元素的话就可以，左侧是用a来渲染背景图左侧'【'，右侧用span来渲染背景图右侧'】'，只取背景图左右两边的边框
 		内部内容有span来填充 【**】【*********】 合起来就是自适应的背景图了
 		*/
         
         .menu ul li a span {
-            display: block;
+            display: inline-block;
             padding-right: 30px;
         }
         
