@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+				padding: 0;
+			}
+			.box1{
+				/*为box1设置一个边框*/
+				border: 10px red solid;
+				display: inline-block;    /*触发方式一 div设置为行内元素:计算该BFC的高度时，内部浮动元素也参与计算    缺点inline-block之间会存在间隙     */
+											/*inline-block元素可以将对象呈递为内联对象，但是对象的内容作为块对象呈递。 
+											 * 对象仍然呈递为内联元素，而同一行内的内联元素默认是基于 baseline 对齐的,但这个还是基于左上角对齐*/
+											
+											
+											/*https://blog.csdn.net/qq_42129063/article/details/80307949*/
+				
+				vertical-align:bottom
+				/*overflow: hidden;*/     /*目前最好的方式*/
+				
+				/*float: left;*/		/*同一 bfc内部就是不能影响外面即使有浮动子元素，同时浮动元素参与高度计算*/
+			}
+			
+			.box2{
+				width: 100px;
+				height: 100px;
+				background-color: blue;
+				
+				/*左浮动，会导致父盒子高度塌陷，但是有受限于在父盒子，会破坏自身高度，脱离出来至上左border之后*/
+				float: left;
+			}
+			
+			a{
+				 background-color: yellow;
+			}
+			span{
+			}
+			p{
+			}
+			h3{
+				background-color: #3C6E31;
+				color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+		<div class="box1">
+			<div class="box2"></div>
+		</div>
+		
+		<a>12312321321321423132222222212343</a>
+		<span>BFC之旅</span>
+		</div>
+		
+		
+		
+		<p>
+			BFC的布局规则
+内部的Box会在垂直方向，一个接一个地放置。
+
+Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。
+
+每个盒子（块盒与行盒）的margin box的左边，与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
+
+BFC的区域不会与float box重叠。
+
+BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
+
+计算BFC的高度时，浮动元素也参与计算。
+
+如何创建BFC
+1、float的值不是none。
+2、position的值不是static或者relative。
+3、display的值是inline-block、table-cell、flex、table-caption或者inline-flex
+4、overflow的值不是visible
+————————————————
+版权声明：本文为CSDN博主「Leon_94」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/sinat_36422236/article/details/88763187
+		</p>
+		
+	<h3>关于解决inline-block的空隙和对不齐的解决方法：https://blog.csdn.net/qq_42129063/article/details/80307949</h3>
+	</body>
+
+
+
+</html>
