@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>滑动门</title>
+    <style type="text/css">
+        .menu {}
+        
+        .menu ul {
+            padding: 0;
+            margin: 20px 20px;
+            list-style-type: none;
+        }
+        
+        .menu li {
+            float: left;
+            background: url(img/under.gif);
+        }
+        
+        .menu ul li a {
+            display: block;
+            padding-left: 30px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #FFFFFF;
+            text-decoration: none;
+            height: 36px;
+            line-height: 36px;
+        }
+        
+        .menu ul li a:hover {
+            color: #FFFFFF;
+            background: url(img/hover.gif) no-repeat top left;
+            /*用a标签覆盖左侧*/
+        }
+        /*
+		span是肯定要设计为块级元素，因为如果是行内元素的话，只是在行里即文字高度设置背景图片。
+		让a和span是同高的元素的话就可以，左侧是用a来渲染背景图左侧'【'，右侧用span来渲染背景图右侧'】'，只取背景图左右两边的边框
+		内部内容有span来填充 【**】【*********】 合起来就是自适应的背景图了
+		*/
+        
+        .menu ul li a span {
+            display: block;
+            padding-right: 30px;
+        }
+        
+        .menu ul li a:hover span {
+            /*悬停a时对span进行如下操作*/
+            color: #FFFFFF;
+            background: url(img/hover.gif) no-repeat top right;
+            /*用span标签覆盖右侧
+				                                                    * 只取右半部份的图片*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <ul>
+            <li><a href="#"><span>Home</span></a></li>
+            <li><a href="#"><span>Map</span></a></li>
+            <li><a href="#"><span>Contact Us</span></a></li>
+            <li><a href="#"><span>Web Dev</span></a></li>
+        </ul>
+    </div>
+</body>
+
+</html>
