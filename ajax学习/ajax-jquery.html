@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax-jquery</title>
+    <script src="./js/jquery.js"></script>
+    <script>
+        window.onload = function(e) {
+            var oBtn = document.querySelector("button")
+            oBtn.onclick = function(e1) {
+                $.ajax({
+                    type: "get",
+                    url: "ajax-get.php",
+                    data: "name=XDD&location=Beijing",
+                    success: function(res) {
+                        alert("Date Saved:" + res)
+                    },
+                    error: function(res) {
+                        alert(res.status)
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <button>发送请求</button>
+
+</body>
+
+</html>

@@ -5,44 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ajax-get</title>
-</head>
-
-<script>
-    window.onload = function(e) {
-        var oBtn = document.querySelector("button");
-        oBtn.onclick = function(e1) {
-            //1.创建一个异步对象
-            let xmlhttp = new XMLHttpRequest();
-
-            //2.设置请求方式和请求地址
-            /*
-            method：请求的类型；GET 或 POST
-            url：文件在服务器上的位置
-            async：true（异步）或 false（同步）
-            */
-            xmlhttp.open("GET", "ajax-get.php", true);
-
-            //3.发送请求
-            xmlhttp.send();
-
-            //4.监听状态的变化
-            xmlhttp.onreadystatechange = function(e2) {
-                /*
-                0: 请求未初始化
-                1: 服务器连接已建立
-                2: 请求已接收
-                3: 请求处理中
-                4: 请求已完成，且响应已就绪
+    <script src="myAjax2.js"></script>
+    <script>
+        window.onload = function(e) {
+            var oBtn = document.querySelector("button");
+            var encode = encodeURIComponent("张三")
+            console.log(encode)
+            oBtn.onclick = function(e1) {
+                /*url中是没有中文的
+                https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=%E5%BC%A0%E4%B8%89
+                上面的wd其实是张三，浏览器处理给你看是中文
+                url上传递参数 如url?key=value&key=value;参数最好分离出来好看
                 */
-                //5.处理返回的结果
-                console.log("接收到服务器返回的数据");
+                ajax("get", "ajax-get.php", {
+                    "userName": "小呆呆xdd",
+                    "userPwd": "1979"
+                }, function(res) {
+                    alert(res.responseText)
+                }, function(res) {
+                    alert("失败")
+                })
+
 
             }
-
-
         }
-    }
-</script>
+    </script>
+</head>
+
 
 <body>
 
