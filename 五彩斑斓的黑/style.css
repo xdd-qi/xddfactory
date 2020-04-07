@@ -1,0 +1,83 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2A3137;
+}
+
+.outer-circle {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    /* linear-gradient 线性梯度：渐变色 */
+    animation: myrotate 5s linear infinite alternate;
+    /*六个属性：绑定到选择器keyframe关键帧的名称 动画一次需要的s 速度曲线 延迟动画s  动画播放次数(inf无限) 正反交替动画播放(alt正反交替) */
+    /* animation不同于transition的点
+    ===animation===                                              ===transition===
+    1、可以理解为会自己动的gif图                                   1、理解为ppt的点击动画
+    循环，自触发                                                    从一种形式 ！过渡！到另一种形式
+
+    2、给你更多的关键帧来分布完成不同属性的css动画变化                 2、你只能控制开始和结束这两个时刻的css形式
+    */
+}
+
+.inner-circle {
+    height: 180px;
+    width: 180px;
+    position: absolute;
+    background: #000;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+
+/* 给你更多的关键帧来分布完成不同属性的css动画变化
+0%--开始帧   100%--结束帧  中间可以加帧
+*/
+
+@keyframes myrotate {
+    0% {
+        /* hue-rotate是色相环的旋转 ps里调整色彩的色彩条做红红绿请蓝紫红的色相环 */
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.outer-circle span {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);
+    border-radius: 50%;
+}
+
+
+/*blur高斯模糊，越大越模糊*/
+
+
+/* E:nth-child() 会匹配父元素下的第一个元素 如果该元素是E则改变css样式  显然这里的span不是父元素的第一个元素    */
+
+span:nth-child(2) {
+    text-align: center;
+    filter: blur(5px);
+}
+
+span:nth-child(3) {
+    text-align: center;
+    filter: blur(15px);
+}
+
+span:nth-child(4) {
+    filter: blur(25px);
+}
+
+span:nth-child(5) {
+    filter: blur(125px);
+}
