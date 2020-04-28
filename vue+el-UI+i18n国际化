@@ -1,0 +1,27 @@
+https://blog.csdn.net/bocongbo/article/details/81668416
+
+npm install vue-i18n -S
+npm install element-ui -S
+
+在lang语言文件夹下，创建en.js和zh.js这两个是中英文变量对照的字典
+比如英文的变量字典export default{
+  hello : 'hello'
+}
+比如中文的变量字典export default{
+  hello : '您好'
+}
+
+在plugins下 新建i18n.js
+import Vue from 'vue'
+import locale from 'element-ui/lib/locale';//eleui的语言包
+import VueI18n from 'vue-i18n'
+import zh和enlocale from './en和zh'//自定义的中英字典
+Vue.use(VueI18n);
+//从localStorage中拿到用户的语言选择，如果没有，那默认英文。
+const i18n = new VueI18n({
+  locale: localStorage.lang || 'en',
+  messages
+});
+locale.i18n((key, value) => i18n.t(key, value)); //为了实现element插件的多语言切换
+ 
+export default i18n
