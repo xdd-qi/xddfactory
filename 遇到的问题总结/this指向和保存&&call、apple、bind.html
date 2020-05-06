@@ -17,24 +17,59 @@
 		<div class="div1"></div>
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script>
-			
-	var a = 1
-function test () {
-    console.log(this.a)
+//测试由对象调用函数时this的指向
+		var a = 1
+		function test() {
+			console.log(this.a)
+		}
+		var obj = {
+			a: 2,
+			test,
+			test2:()=>{console.log(this.a)}//根据父级上下文 现在是全局的obj 故this固定为window
+		}
+		//console.log(test)
+		//test() //直接调用
+		obj.test()//对象调用
+		setTimeout(obj.test,2)//定时器调用
+		setTimeout(obj.test2,3)//定时器调用
+//		function setTimeout (fn, time) {
+//  // 这里干了一大波不可描述的事情，最后会去调一下你传进来的回调函数    就等于直接调用test(),此时是形式一
+//  	fn()  ==== function test() {
+//			console.log(this.a)
+//		}
+//}
+		
+//测试由new出来的实例中this是否指向实例
+		function testnew(a) {
+			this.a = a
+		}
+		var t = new testnew(2)
+		console.log(t)
+		console.log(t.a)
+		
+		
+//	测试构造函数里的函数是由谁来调用的	  测试得出b是由window来调用的。其实that存储this的指向就是箭头函数里this的指向
+		var a22=11
+function testf(){
+this.a22=22;
+that = this
+   	b=function(){
+   		console.log(this)
+	console.log(that)
+	console.log(this.a22)
+    console.log(that.a22);
+};
+console.log(this) //此时的this时由 new出来的：由类test1() 实例化过程 赋给x 在执行结束后并把test1()类this返回出去，this也就是实例x了
+console.dir(b)
+console.dir(this.a22)
+return b();//而这个b 只是代码块的执行内容，调用b 和声明一个函数，调用他 此时是由全局来调用的
 }
-var obj = {
-    a: 2,
-    test
-}
-setTimeout(obj.test)
-var a = 1
-function test (a) {
-    this.a = a
-}
-var b = new test(2)
-console.log(b.a)			
-			
-			var name = "wq",
+var x=new testf();	
+console.log(x)
+console.log(b)
+
+
+var name ="wq",
 				age = "17"
 			var obj = {
 

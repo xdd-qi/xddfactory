@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var a = 1
+var test = () => {
+	console.log(this)
+    console.log(this.a)
+}
+var test2 = function(){
+	console.log(this)
+    console.log(this.a)
+}
+var obj = {
+    a: 2,
+    test,
+    test2
+}
+obj.test()
+obj.test2()
+
+
+var obj = {
+    birth: 1990,
+    getAge: function () {
+        var b = this.birth; // 1990
+        console.log(b)
+        var fn = () => new Date().getFullYear() - this.birth; // this指向obj对象
+        console.log(fn()) ;
+    }
+};
+obj.getAge();
+
+var aa=11;
+function test3(){
+  this.aa=22;
+  let b=()=>{console.log(this.aa)}
+  b();
+}
+var x=new test3();
+//输出22
+		</script>
+	</body>
+</html>

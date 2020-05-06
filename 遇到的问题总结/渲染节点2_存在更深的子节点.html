@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		a{
+			text-decoration: none;
+			color: #000000;
+		}
+	</style>
+	<body>
+		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="5000node2.js"></script>
+		<script type="text/javascript">
+var aTree = [
+    {"id": "1", "name": "车", "pid": "0"},
+
+{"id": "2", "name": "家用车", "pid": "1"},
+{"id": "3", "name": "跑车", "pid": "1"},
+{"id": "4", "name": "公交车", "pid": "1"},
+
+ 
+
+{"id": "5", "name": "旅游巴士", "pid": "4"},
+{"id": "6", "name": "公共汽车", "pid": "4"},
+
+
+{"id": "7", "name": "肌肉车", "pid": "3"},
+{"id": "8", "name": "兰博基尼", "pid": "3"},
+{"id": "9", "name": "非尼塞科", "pid": "3"},
+ 
+{"id": "10", "name": "suv", "pid": "2"},
+{"id": "11", "name": "五菱宏光", "pid": "2"},
+{"id": "12", "name": "丰田", "pid": "2"},
+{"id": "13", "name": "大众", "pid": "2"},
+];
+//var aTree = zNodes
+console.log(aTree)
+//var timeChunk = function(arr, fn, count) {
+//  var obj, t;
+//  var len = arr.length;
+//  console.log(len)
+//  var start = function() {
+//      for (var i = 0; i < Math.min(count || 1, arr.length); i++) {
+////          var obj = arr.shift();
+//			var obj = arr
+//			
+//          console.log(obj)
+//          if(obj[i].pid == 0){
+//          	fn(0,obj)
+//          }
+//          var id = obj[0].id //id永远是数组的第一项 原因要看他还有没孩子
+//          fn(id,obj)
+//          var end = arr.shift();//作为标记，每遍历一个就少一个就好了 要不然定时器会一直遍历下去的
+//      }
+//  };
+//  //return function() {     //把定时器封装成一个函数 return出去，这样的话 之后就需要再调用才可以使用
+//  	console.log(1)
+//      t = setInterval(function() {
+//          if (arr.length === 0) {
+//              return clearInterval(t);
+//          }
+//          start()
+//      }, 200)
+//  //}
+//}
+function getSon(id, aTree) {
+	console.log(2)
+    var aParent = [];
+        for (var i in aTree) {
+            if (aTree[i].pid == id) { //如果json{}中的pid等于传入的id
+                aParent.push(aTree[i]);
+                //console.dir(aParent)
+            }
+        }
+    return aParent;
+    
+}
+var menu = '';
+function makeTree(id, aTree) {
+	console.log(3)
+    var preMenu = getSon(id, aTree);
+    //debugger
+	//console.dir(preMenu)
+    if (preMenu) {//如果存在一个树形 [{}]
+        for (var i in preMenu) {
+            menu = menu+'<a href="#">' + preMenu[i].pid+'---'+preMenu[i].name + '</a>';
+            menu = menu+'<ul>' 
+            //开始递归调用
+            makeTree(preMenu[i].id, aTree);//根据当前id找自己的儿子,把儿子的结构拼接出来
+            menu = menu+'</ul>'
+//          var li = document.createElement('li');
+//  		li.innerHTML ='<ul>'+ preMenu[i].pid+'---'+preMenu[i].name;
+//          document.body.appendChild(li)
+            //console.log(menu)
+        }
+    }
+}
+//var renderFriendList = timeChunk(aTree, makeTree, 8)  //已经算是调用timeChunk了，但是由于return出的是function，所以不会调用
+makeTree(0, aTree);
+$("body").append(menu)
+
+
+
+
+		</script>
+	</body>
+</html>

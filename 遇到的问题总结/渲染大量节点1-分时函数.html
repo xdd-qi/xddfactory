@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script src="5000node.js"></script>
+		<script type="text/javascript">
+		var arr1 = [];
+for (var i = 1; i <= 1000; i++) {
+    arr1.push(i) //假设arr装载了100个好友数据
+}
+
+var timeChunk = function(arr, fn, count) {
+    var obj, t;
+    var len = arr.length;
+    console.log(1)
+    var start = function() {
+    	 console.log(2)
+        for (var i = 0; i < Math.min(count || 1, arr.length); i++) {
+            var obj = arr.shift();
+            fn(obj)
+        }
+    };
+    //return function() {
+        t = setInterval(function() {
+        	 console.log(3)
+            if (arr.length === 0) {
+                 clearInterval(t);
+            }
+            start()
+        }, 200)
+    //}
+}
+var renderFriendList = timeChunk(arr1, function(n) {
+	console.log("xdd")
+    var div = document.createElement('div');
+    div.innerHTML = n;
+    document.body.appendChild(div)
+}, 8)  //相当于已经调用了timeChunk 
+
+
+
+
+		</script>
+	</body>
+</html>

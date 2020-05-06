@@ -19,7 +19,7 @@
 		console.log([oBox])//输出的是dom元素 是dom对象
 		console.log(oBox) //输出的是dom节点 是html标签
 		console.dir(oBox)//输出的是dom节点 是dom对象
-		alert(typeof oBox)
+		console.log(typeof oBox)//dom元素就是个js对象,可以调用js的方法来操作 代码片段解析为HTMLxxxxElement类型是 object对象
 		
 //		log语句打印的是结果，直接显示信息；
 //		dir语句打印的是内容，对显示对象的所有属性和方法。这样的区别在输出普通数据时没有区别，打印的内容完全一样，在打印对象时就有区别了。
@@ -28,13 +28,14 @@
         console.log(oBox.style)
         console.log(oBox.getAttribute("style"))
      //第一组
-      alert(oBox.xdd); // undefined  本是html元素，通过doc.get**() html的atr特性 映射为  DOM的pro属性时，只映射标准id style属性不映射xdd特性
+      console.log(oBox.xdd); // undefined  本是html元素，通过doc.get**() html的atr特性 映射为  DOM的pro属性时，只映射标准id style属性不映射xdd特性
 //(通过setAttr设置的就是设置在html特性上,如果不标准一样不会映射在dom上)，访问非标准属性将得到 undefined。
       
-      alert(oBox.getAttribute('xdd')) // 王琦
+      console.log(oBox.getAttribute('xdd')) // 王琦
+      
       //第二组
-      alert(oBox.test); // 测试
-     alert(oBox.getAttribute('test')) // null
+      console.log(oBox.test); // 测试
+     console.log(oBox.getAttribute('test')) // null
 		var ab = document.getElementById("ab")
 		function addAtr(){
 			odiv.style["height"] = 400+"px"
@@ -52,5 +53,18 @@
 		</script>
 		<input type="button" name="" id="ab" value="" onclick="addAtr()"/>
 		<div id="box" xdd="王琦" style="width:100%; padding:10px;"></div>
+		1、首先写在div标签上的叫atr<br />
+		然后用setatr这个js方法也是也在atr上<br />
+		打印出来可以看到一个dom对象上有一个atr属性，它有以下的值<br />
+		attributes: NamedNodeMap {0: id, 1: xdd, 2: style, 3: wq, id: id, xdd: xdd, style: style, wq: wq, length: 4}<br />
+		<br />
+		<br />
+		2、再看用点来添加属性添加的是prop 也就是dom对象一点开所有的都是prop<br />
+		包括atr也是dom对象的一个prop<br />
+		只不过这个atr是由html元素 写在标签上或者用setatr映射过来的<br />
+		真正oBox.test='测试';  这个是dom对象的prop单独新设置的prop:test: "测试"<br />
+		而atr里的很多属性如id style src只有这些叫标准属性 才会再次从atr对象里映射到prop上可以找到这些字段 id: "box"  style: CSSStyleDeclaration {0: "width", 1: "padding....和atr里的是一样的<br />
+		而xdd 你是找不到的 你只能在atr内部里看到 但在dom的prop找不到，因为不标准不映射出去
+		
 	</body>
 </html>
