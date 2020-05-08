@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-		<script type="text/javascript">
-			function test(resolve, reject) {
-    var timeOut = Math.random() * 2;
-    console.log('set timeout to: ' + timeOut + ' seconds.');
-    setTimeout(function () {
-        if (timeOut < 1) {
-            console.log('call resolve()...');
-            resolve('200 OK');
-        }
-        else {
-            console.log('call reject()...');
-            reject('timeout in ' + timeOut + ' seconds.');
-        }
-    }, timeOut * 1000);
-}
-			//test()
-			var p1 = new Promise(test)
-			console.log(p1)
-var p2 = p1.then(function (result) {
-    console.log('成功：' + result);
-});
-var p3 = p2.catch(function (reason) {
-    console.log('失败：' + reason);
-});
 
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
 
-var xml = new XMLHttpRequest()
-xml.open()
-xm.send()
-if
-
-function ajax(method, url, data) {
-    var request = new XMLHttpRequest();
-    return new Promise(function (resolve, reject) {
-        request.onreadystatechange = function () {
-            if (request.readyState === 4) {
-                if (request.status === 200) {
-                    resolve(request.responseText);
+<body>
+    <script type="text/javascript">
+        function test(resolve, reject) {
+            var timeOut = Math.random() * 2;
+            console.log('set timeout to: ' + timeOut + ' seconds.');
+            setTimeout(function() {
+                if (timeOut < 1) {
+                    console.log('call resolve()...');
+                    resolve('200 OK');
                 } else {
-                    reject(request.status);
+                    console.log('call reject()...');
+                    reject('timeout in ' + timeOut + ' seconds.');
                 }
-            }
-        };
-        request.open(method, url);
-        request.send(data);
-    });
-}
+            }, timeOut * 1000);
+        }
+        //test()
+        //构建promise对象，new出来，promise对象里有两个参数，一个是resolve函数  一个是reject函数 分别是对应已执行。和执行失败两个回调
+        var p1 = new Promise(test)
+        console.log(p1)
+        var p2 = p1.then(function(result) {
+            console.log('成功：' + result);
+        });
+        var p3 = p2.catch(function(reason) {
+            console.log('失败：' + reason);
+        });
 
-		</script>
-	</body>
+        //其实jquery里的 $.ajax返回的就是 promise对象  axios也是promise对象
+
+        //封装自己的ajax 用promise封装
+        function ajax(method, url, data) {
+            var request = new XMLHttpRequest();
+            //这个函数返回的是一个promise对象，所以使用时 用.then()方法来使用
+            return new Promise(function(resolve, reject) {
+                request.onreadystatechange = function() {
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            //在这个条件下 执行resolve回调  具体的回调内容写在.then方法里的第一个函数中  当处于这个状态时让系统去执行一个函数而已
+                            //具体函数是什么，还是在.then()中去写，promise只是提供一个写法，告知在什么状态下执行什么回调而已
+                            resolve(request);
+                        } else {
+                            //在这个条件下 执行reject回调  具体的回调内容写在.then方法里的第二个函数中   当处于这个状态时让系统去执行一个函数而已
+                            reject(request);
+                        }
+                    }
+                };
+                request.open(method, url);
+                request.send(data);
+            });
+        }
+        //假设请求一个地址
+        var p = ajax("GET", "/newapi/123")
+        p.then(resolve => {
+            alert("成功了")
+            console.log(resolve)
+        }, err => {
+            alert("失败了")
+            console.log(err)
+        })
+    </script>
+</body>
+
 </html>
