@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script>
+    async function show() {
+        let a = 12
+        let b = 5
+        let data = await $.ajax({
+            url: 'js/dataName.json',
+            dataType: 'json'
+        })
+        alert(a + b + data.age)
+    }
+    show()
+</script>
+
+<body>
+    <h3>async与await其实是一种分段式异步操作。就是该同步的地方你继续同步着写。该异步的地方也按照同步去写，只不过前面加上await系统会知道此时需要异步了需要暂停下来把await后面的先放入异步队列中去</h3>
+    async关键字。其实就是让系统知道这个地方是需要异步处理的 <br> await关键字。告诉系统具体知道哪个操作或者程序是异步的，把他放进异步队列里。继续执行下面的同步操作
+    <br> await也是用.then()来继续执行之后成功的回调或者失败的回调
+    <br>
+    <br>
+    <div>
+        async function show(){
+        <br> *********; <br> *****;
+        <br> let data = await $.ajax(); <br> //要等待data拿到之后再继续xxxx zzz <br>
+        <br> xxxx <br> zzz <br> } <br>
+        <br> show() <br>
+    </div>
+    <br>async与await 相当于把函数拆分成两部分
+    <br> 在遇到async是系统会知道该函数需要有异步操作会把show函数拆分
+    <br> function show_1(){<br> let a = 12<br> let b =5<br> }
+    <br>
+    <br>遇到await进行拆分<br>
+    <br> $.ajax({ url: 'js/dataName.json',dataType: 'json'})
+    <br> 然后剩下的代码会在异步的.then()回调中去调用
+    <br> $.ajax({ url: 'js/dataName.json',dataType: 'json'}).then(resolve=>{ show_2() })
+    <br> function show_2(){<br> alert(a + b + data.age)<br> }
+    <br>
+</body>
+
+</html>
