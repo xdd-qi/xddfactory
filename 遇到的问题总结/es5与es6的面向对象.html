@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function Person(name, age) {
+        this.name = name
+        this.age = age
+
+    }
+    Person.prototype.showName = function() {
+        alert(this.name)
+    }
+    let p1 = new Person("王琦", 1)
+    console.dir(p1)
+    p1.showName()
+
+    class People {
+        constructor(name, age) {
+            this.name = name
+            this.age = age
+        }
+        showAge() {
+            alert(this.age)
+        }
+    }
+    let p2 = new People("小呆呆", 23)
+    console.dir(p2)
+    p2.showAge()
+
+    function Worker(name, age, job) {
+        //call就是把一个特定的函数绑定在一个对象上。并进行调用
+        //把Person这个类或者构造函数放在 this this现在所指等调用的时候就是Worker了
+        //name age都传给Person调用使用
+        Person.call(this, name, age)
+            //上面是父类属性的继承
+        this.job = job
+
+        //接下来就是父类方法的继承了       
+    }
+    //父类方法的继承 让原型设计来自Person
+    Worker.prototype = new Person()
+        //此时打印出来Worker类！！是这个类！ 类的原型都是Person的原型和Person构造函数 prototype: Person
+    console.dir(Worker)
+        //把Worker的构造函数修正回自己保证类和构造函数是一一对应的 以防出错
+    Worker.prototype.constructor = Worker
+
+    Worker.prototype.showJob = function() {
+        alert(this.job)
+    }
+    let w1 = new Worker("王琦", 18, "前端")
+        //打印可以看出 对象的原型指向的是person__proto__: Person
+        //原型里的构造重新修正为Worker
+        //在原型添加的方法上有自己的showName也有showName
+    console.log(w1)
+    w1.showName()
+    w1.showJob()
+
+    //es6 extends继承关键字
+    class Student extends People {
+        constructor(name, age, school) {
+            //继承父类的关键字super   name和age传给父类使用
+            super(name, age)
+
+            //加上自己的属性
+            this.school = school
+        }
+
+        showSchool() {
+            alert(this.school)
+        }
+
+    }
+    //打印student类可以看到prototype: People 说明继承了people的构造函数
+    //但constructor又会指向自己本身student函数
+    console.dir(Student)
+    let s1 = new Student("小呆呆", 12, "农大附中")
+    console.log(s1)
+    s1.showAge()
+    s1.showSchool()
+</script>
+
+<body>
+    <p>什么是面向对象？<br> 封装好的一个功能，不用在乎其内部函数具体怎么编写的实现的
+        <br> 只要调用了这个对象就能完成一些功能比如 new Date()
+    </p>
+    <p>
+        es5 是以函数的形式来写对象，类。
+        <br> function Person(name,age){<br> //添加属性
+        <br> this.name = name <br> this.age = age <br> } <br> //添加方法 通过给类的原型添加一个方法<br> Person.prototype.showNme = function(){ <br> alert(this.name) <br> } <br>
+    </p>
+    <p>es6就是为了解决不再用function来创造类，不再用prototype的原型添加方法，写起来更像Java</p>
+    <br>
+    <br>
+    <p>es6有了类和沟槽函数的单独声明</p>
+    class Person{ 声明一个类 用关键字class<br> constructor(name,age){ 声明一个构造函数 用关键字constructor <br> 依旧是this来声明属性
+    <br> this.name = name <br> this.age = age <br> } <br> //不需要用原型添加prototype.来添加方法了，直接写函数就可以了 <br> showName(){
+    <br> alert(this.name) <br> } <br> }
+</body>
+
+</html>
