@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form>
+		规则表达式 ： (填写/ /之间的表达式)<br />
+		<input type="input" name="regxStr" value="" ><br />
+		校验字符串 ：<br />
+		<input type="input" name="str" value="" >
+		<input type="button" name="match" value="匹配" onClick="alert(regx(regxStr.value,str.value));">
+		</form>
+		<script type="text/javascript">
+			var str = "ab\"\cdewfg=/=/x==q"
+			var re0 = /"/g;
+			var re1 = new RegExp("\\w", "g")  // \w 意为：字母数字下划线字符 所以在字面量里可以直接使用  但是在""字符串中 \是由特殊含义的 意为：转义。故 "\w" 就等于转义w =>就等于了 => "w"
+			//【注意】第一种字面量/ /形式的里面输入什么就匹配什么 缺点是不能有变量
+			//		  第二种函数体(" ")形式，因为是以字符串形式的，所以有些符号比如" ' / 很多有特殊含义的字符 这些字符其实已经不再属于字符串的含义了，所以需要多用反斜杠\来转义
+			var newstr = str.match(re0)
+			var newstr2 = str.match(re1)
+			console.log("正则匹配到的结果是==》"+newstr)
+			console.log("正则匹配到的结果是==》"+newstr2)
+			
+			//^ $ 两个字符很特殊  ^ $
+			// ^The：表示所有以"The"开始的字符串"There"，"The cat"等；
+			// of despair$：表示所以以"of despair"结尾的字符串；
+			
+			 function regx(r,s){
+      			if (r == null || r == ""){
+       				return;
+      			}
+      			console.log("传入的正则规则字符串是：：："+r)
+      			console.log("传入的字符串是：：："+s)
+      			//函数体形式可以导入变量！！！！  当然这个变量的值要是字符串 而input.value 就是字符串类型
+      		var patrn= new RegExp(r);
+      		console.log("正则匹配对象规则是：>>>"+patrn)
+      		return patrn.test(s);
+    		}
+		</script>
+	</body>
+</html>

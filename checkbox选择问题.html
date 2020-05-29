@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+    	#box-function{
+    		width: 100px;
+    	}
+    </style>
+</head>
+<body>
+ 
+<div id="box-function">
+   全选
+ </div>
+ <div id="choose">
+    <input type="checkbox" data-user-name="num" name="xdd"/>吃饭 <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>睡觉 <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>唱歌 <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>cs <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>lol <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>抽烟 <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>喝酒 <br />
+     <input type="checkbox" data-user-name="num" name="xdd"/>烫头 <br />
+
+</div>
+<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+         $(function(){
+         	var flag = 0
+            $("#box-function").on("click",function(){
+            	console.log(flag)
+            	console.log($("input[data-user-name]"))
+            	//$(":checkbox").prop("checked","checked");   attr只能接受字符串了，不能再接受别的类型的参数了，当给到false的时候 固有属性checked会退回到false.之后哪怕再添加，那也是添加的一个标签属性 无法对checked固有属性做修改了
+            	$("input[data-user-name='num']").attr("checked",true)
+            	if(flag == 1){
+            		$("input[data-user-name='num']").attr("checked",false)
+            	}
+            	flag++
+            	if(flag>1){
+            		flag = 0
+            	}
+            })
+         });
+     </script>
+ 
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="checkbox" name="phoneBook"><span>李梅</span><span>123</span>
+		<input type="checkbox" name="phoneBook"><span>张哥</span><span>234</span>
+		<input type="checkbox" name="phoneBook"><span>垒石</span><span>345</span>
+		<input type="checkbox" name="phoneBook"><span>健卒</span><span>456</span>
+		<input type="checkbox" name="phoneBook"><span>青海</span><span>567</span>
+		<input type="checkbox" name="phoneBook"><span>丢与黑</span><span>678</span>
+		<input type="button" value="点击截取字符串"/>
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script>
+			var List = []
+			var josnStr = ""
+			var MAXLEN = 60
+			var now = null
+			var phoneList = []
+			$(":button").on("click", function(){
+				$(":checked").each(function(){
+				var obj = {}
+				obj["name"] = $(this).nextAll("span:eq(0)").text()
+				obj["number"] = $(this).nextAll("span:eq(1)").text()
+				List.push(obj)
+			})
+				console.log(List)
+				josnStr = JSON.stringify(List)
+				console.log(josnStr.length)
+				pkJson(MAXLEN,now)
+			})
+			function pkJson(len,now){debugger							
+				console.log(josnStr.length)
+				console.log(now)
+				console.log(len)
+				while(josnStr.length>len){
+					var now	= 0
+					var xstr = ''
+					var onephoneStr = ''
+					xstr = josnStr.substr(now,now+len)
+					var next = xstr.lastIndexOf("}")
+					onephoneStr = xstr.substr(now+1,next)
+					now = next
+					now++
+					phoneList.push(onephoneStr)
+					josnStr = josnStr.substr(next+1)
+					console.log(josnStr)
+					console.log(phoneList)
+				}				
+				phoneList.push(josnStr.substr(1,(josnStr.length-2)))
+				console.log(phoneList)
+				console.log(xstr)
+				console.log(now)
+				console.log(next)
+				console.log(xstr,josnStr)
+				console.log(onephoneStr)
+			}
+		</script>
+	</body>
+</html>
