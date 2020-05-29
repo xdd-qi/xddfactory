@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="content"></div>
+		<!--HTML模板(类似MVC中的view)-->
+		<script type="text/html" id="template">
+  			<p>name: {{name}}</p>
+  			<p>age: {{age}}</p>
+		</script>
+		
+		<script type="text/javascript">
+		// 模板引擎函数(类似MVC中的controller)
+			var mtpl = function(tpl, data) {
+				var cursor = 0;
+				console.log("拿到的字符串html模板1===="+tpl)
+				console.log("拿到的要替换的数据====="+JSON.stringify(data))
+  			var re = /{{(.+?)}}/g;
+  			console.log("正则匹配要替换的规则表达式：：："+re)
+  				while((match = re.exec(tpl))!==null) {
+  					console.log("匹配到的替换结果在哪里：：："+match)
+  					console.log("exec()返回的对象是不是个数组？？？"+Array.isArray(match))
+  					console.log("完整匹配的字符串0：：："+match[0])
+  					console.log("匹配到的子字符串1：：："+match[1])
+  					console.log("匹配到的子字符串2：：："+match[2])
+  					console.log("匹配到的替换位置从这里开始：：：：：："+ match.index)
+  					console.log(tpl.slice(cursor, match.index))
+  					cursor = match.index + match[0].length;
+  					console.log("改变游标卡尺：：：：：："+ cursor)
+  					console.log(tpl[cursor])
+    				if(match[1]) {
+    					console.log("替换成什么内容呢？？？======"+data[match[1]])
+    					//这里data [match[1]] 作为了 data对象里的key 从而拿到对应的值
+      					tpl = tpl.replace(match[0], data[match[1]])
+      					console.log("替换阶段实施中。。。。"+tpl)
+    				} else {
+      				tpl = tpl.replace(match[0], '')
+   					}
+  				}
+  				console.log("最终模板字符串被替换为||||||||"+tpl)
+  			return tpl;
+		}
+
+		// 模板数据(类似MVC中的model)
+		var tpl = document.getElementById("template").innerHTML;
+		console.log("拿到的字符串html模板1"+tpl)
+		document.getElementById("content").innerHTML = mtpl(tpl,{
+  			name: "zhaomenghuan",
+  			age: 22
+		});
+		
+		var data = {
+  			name: 'zhaomenghuan',
+  			age: 22
+		}
+//函数构造器 (参数，函数体) let func = new Function ([arg1[, arg2[, ...argN]],] functionBody)   ('可选'，'必写')   可选部分 如果就一个参数(arg1,函数执行内容) 多个参数就(arg1,arg2,...,函数执行内容)
+new Function("console.log(this.name + ' is ' + this.age +' years old.');").apply(data);
+
+
+//用字符串拼接模板的方式，把像拼接的对象属性插入到模板中去！
+		var data = {
+		  name: 'zhaomenghuan',
+		  age: 22
+		}
+		var code = 'var r=[];\n';
+		code += 'r.push("<p>");\n';    //因为最后显示出来的是html结构 所以html的标签结构 千万不要转义 <p> 浏览器会自动识别这些有特殊意义的字符：<>是html结构
+		code += 'r.push(this.name);\n'
+		code += 'r.push("</p><p>");\n';
+		code += 'r.push(this.age);\n';
+		code += 'r.push("</p>");\n';
+		code += 'return r.join("");';
+		console.log(code)
+		var fn = new Function(code.replace(/[\r\t\n]/g, '')).apply(data);
+		console.log(fn)
+</script>
+	</body>
+</html>

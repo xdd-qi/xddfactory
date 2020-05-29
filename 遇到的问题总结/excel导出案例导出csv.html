@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>js导出ExcelDemo</title>
+ 	<style>
+ 		.div1{
+ 			background-color: red;
+ 			width: 200px;
+ 			height: 200px;
+	 		}
+ 	</style>
+</head>
+<body>
+	 <p style="font-size: 20px;color: red;">使用a标签方式将json导出csv文件</p>
+	 <!--<div style="background-color: green; width: 200px; height: 200px;">模拟双击事件</div>-->
+	 <div class="div1">模拟双击事件</div>
+  <button onclick='tableToExcel()'>导出</button>
+  <script>
+    window.onload = function(e){
+    	let oDiv = document.querySelector("div")
+    	console.log(oDiv)
+//   	 oDiv.addEventListener("contextmenu", function(e){
+//   	 	e.preventDefault()
+//   	 	
+//    	console.log("模拟点击了")
+//    	oDiv.setAttribute("style", "width: 600px;background-color: green")
+//    })
+//   	 console.log(1111)
+//   	 oDiv.click()
+		var x = document.createEvent('MouseEvent');
+		x.initEvent('build',true,true);
+		oDiv.addEventListener('build', function(){
+			console.log(111111)
+			oDiv.setAttribute("style", "width: 600px;background-color: green")
+		})
+		oDiv.dispatchEvent(x)	
+    }
+
+    function tableToExcel(){
+      //要导出的json数据
+      const jsonData = [
+        {
+          name:'路人甲',
+          phone:'123456789',
+          email:'000@123456.com'
+        },
+        {
+          name:'炮灰乙',
+          phone:'123456789',
+          email:'000@123456.com'
+        },
+        {
+          name:'土匪丙',
+          phone:'123456789',
+          email:'000@123456.com'
+        },
+        {
+          name:'流氓丁',
+          phone:'123456789',
+          email:'000@123456.com'
+        },
+      ]
+      //列标题，逗号隔开，每一个逗号就是隔开一个单元格
+      let str = `姓名,电话,邮箱\n`;
+      //增加\t为了不让表格显示科学计数法或者其他格式
+      for(let i = 0 ; i < jsonData.length ; i++ ){
+      	debugger;
+        for(let item in jsonData[i]){
+            str+=`${jsonData[i][item] + '\t'},`;     
+        }
+        str+='\n';
+      }
+      debugger;
+      //encodeURIComponent解决中文乱码
+      let uri = 'data:text/csv;charset=UTF-8,\ufeff' + encodeURIComponent(str);
+      //通过创建a标签实现
+      let link = document.createElement("a");
+      link.href = uri;
+      //对下载的文件命名
+      link.download =  "json数据表.csv";
+      document.body.appendChild(link);
+      link.addEventListener("click", function(){
+      	console.log("导出成功！！！")
+      });
+      
+      link.click()//js调用click事件
+      document.body.removeChild(link);
+    }
+ 
+</script>
+</body>
+</html>
+————————————————
+版权声明：本文为CSDN博主「hhzzcc_」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/hhzzcc_/java/article/details/80419396
